@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
             SDL_RenderTexture(state.renderer, t.texture, NULL, &t.dst);
         SDL_RenderPresent(state.renderer);
     }
-
+    //random
     cleanup(state);
     return 0;
 }
