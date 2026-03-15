@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="smallestwindow.cpp">
+    <ClCompile Include="smallestwindow.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="dialogue.cpp">

@@ -105,13 +105,13 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\SDL2\SDL3-devel-3.4.2-VC\SDL3-3.4.2\include;C:\SDL2\SDL3_ttf-devel-3.1.0-VC\SDL3_ttf-3.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\SDL2\SDL3-devel-3.4.2-VC\SDL3-3.4.2\include;C:\SDL2\SDL3_ttf-devel-3.1.0-VC\SDL3_ttf-3.1.0\include;C:\SDL2\SDL3-devel-3.4.2-VC\SDL3-3.4.2\include\SDL3;C:\SDL2\SDL3_image-devel-3.4.0-VC\SDL3_image-3.4.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\SDL2\SDL3-devel-3.4.2-VC\SDL3-3.4.2\lib\x64;C:\SDL2\SDL3_ttf-devel-3.1.0-VC\SDL3_ttf-3.1.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3.lib;SDL3_test.lib;SDL3_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SDL2\SDL3-devel-3.4.2-VC\SDL3-3.4.2\lib\x64;C:\SDL2\SDL3_ttf-devel-3.1.0-VC\SDL3_ttf-3.1.0\lib\x64;C:\SDL2\SDL3_image-devel-3.4.0-VC\SDL3_image-3.4.0\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_test.lib;SDL3_ttf.lib;SDL3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -130,11 +130,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dialogue.cpp" />
+    <ClCompile Include="dialogue.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="smallestwindow.cpp">
+    <ClCompile Include="smallestwindow.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
   </ItemGroup>
