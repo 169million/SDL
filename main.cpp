@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     player1.x = (float)(state.winwidth / 2) - (isurface->w / 2.0f);
     player1.y = (float)(state.winheight / 2) - (isurface->h / 2.0f);
     int movex = 0;
-    int speed = 3;
+    float speed = 200.0f;
 
     itexture = SDL_CreateTextureFromSurface(state.renderer, isurface);
     irect = {
@@ -53,11 +53,17 @@ int main(int argc, char* argv[]) {
     SDL_FRect oldirect = irect;
     SDL_DestroySurface(isurface);
     bool running = true;
+    Uint64 lastTime = SDL_GetPerformanceCounter();
+    float deltaTime = 0.0f;
     float velocity = 0.0f;
-    float gravity = 0.01f;
+    float gravity = 500.0f;
     bool grounded = false;
 
     while (running) {
+        Uint64 now = SDL_GetPerformanceCounter();
+        deltaTime = (float)(now - lastTime) / (float)SDL_GetPerformanceFrequency();
+        lastTime = now;
+        deltaTime = SDL_min(deltaTime, 0.05f);
         SDL_Event event{ 0 };
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -91,7 +97,7 @@ int main(int argc, char* argv[]) {
                     }
                 }
                 if ((event.key.key == SDLK_W || event.key.key == SDLK_SPACE) && grounded) {
-                    velocity = -2.5f;
+                    velocity = -500.0f;
                     grounded = false;
                 }
                 if (event.key.key == SDLK_BACKSPACE && strlen(state.inputText) > 0 && strlen(state.inputText) < 256 && state.allowtyping) {
@@ -120,12 +126,12 @@ int main(int argc, char* argv[]) {
             if (keys[SDL_SCANCODE_A]) movex = -1;
             if (keys[SDL_SCANCODE_D]) movex = 1;
 
-            velocity += gravity;
+            velocity += gravity * deltaTime;
 
             oldirect.x = irect.x;
             oldirect.y = irect.y;
-            irect.x += movex * speed;
-            irect.y += velocity;
+            irect.x += movex * speed * deltaTime;
+            irect.y += velocity * deltaTime;
 
             grounded = false;
             for (auto& w : walls) {
